@@ -74,6 +74,16 @@ class ApplicationController < ActionController::Base
   end
   helper_method :forums?
 
+  def hide_admin_footer?
+    AppSettings['settings.hide_admin_footer'] == "1" || AppSettings['settings.hide_admin_footer'] == true
+  end
+  helper_method :hide_admin_footer?
+
+  def hide_app_footer?
+    AppSettings['settings.hide_app_footer'] == "1" || AppSettings['settings.hide_app_footer'] == true
+  end
+  helper_method :hide_app_footer?
+
   def knowledgebase?
     AppSettings['settings.knowledgebase'] == "1" || AppSettings['settings.knowledgebase'] == true
   end

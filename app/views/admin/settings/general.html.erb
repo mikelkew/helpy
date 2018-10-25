@@ -9,6 +9,8 @@
       <div class="settings-section design">
         <%= f.text_field 'branding.ticketing_color', value: AppSettings['branding.ticketing_color'], label: t('ticketing_branding', default: "Admin Branding Color"), class: 'pick-a-color' %>
         <%= f.text_field 'branding.ticketing_bg_color', value: AppSettings['branding.ticketing_bg_color'], label: t('ticketing_bg_branding', default: "Admin Background Color"), class: 'pick-a-color' %>
+        <%= f.check_box 'settings.hide_admin_footer', { checked: hide_admin_footer?, label: t('hide_admin_footer', default: "Hide Admin Footer"), label_class: 'full-width', class: 'bs-toggle', data: { size: 'mini' } } %>
+        <%= f.check_box 'settings.hide_app_footer', { checked: hide_app_footer?, label: t('hide_app_footer', default: "Hide Main App Footer"), label_class: 'full-width', class: 'bs-toggle', data: { size: 'mini' } } %>
       </div>
 
       <h4 class="settings-subsection">Self Service Site</h4>

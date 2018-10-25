@@ -392,6 +392,8 @@ en:
   enable_tickets: Enable Private Tickets
   enable_teams: Enable Teams
   enable_welcome_email: Send a welcome email to new users
+  hide_admin_footer: Hide Admin Footer?
+  hide_app_footer: Hide Main App Footer?
 
   # Design
   header_logo: Header Logo
