@@ -1,39 +1,33 @@
-version: '2'
+version: '2.1'
 
 services:
-  frontend:
-    image: webwurst/caddy
-    volumes:
-      - ./docker/Caddyfile:/etc/caddy/Caddyfile
-      - ./certs:/etc/caddy/certs
-    volumes_from:
-      - helpy:ro
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - front
-    restart: always
-    depends_on:
-      - helpy
   helpy:
-    image: helpy/helpy
+    image: mikelkew/helpy
     restart: always
     networks:
-      - front
-      - back
+      - web
+      - default
     volumes:
       - rails-assets:/helpy/public
     env_file: docker/.env
-    #environment:
+    environment:
+      - UNICORN_PORT=9000
     #  - DO_NOT_PREPARE=true
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    expose:
+      - "9000"
+    labels:
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:support.roaradventures.com"
+      - "traefik.port=9000"
   postgres:
     image: postgres:9.4
     restart: always
     networks:
-      - back
+      - default
     env_file: docker/.env
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -43,7 +37,5 @@ volumes:
     driver: local
 
 networks:
-  front:
-    driver: bridge
-  back:
-    driver: bridge
+  web:
+    external: true

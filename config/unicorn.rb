@@ -11,6 +11,8 @@ preload_app true
 # haven't responded within 30 seconds
 timeout 30
 
+listen ENV['UNICORN_PORT'] if ENV['UNICORN_PORT']
+
 before_fork do |_server, _worker|
 
   Signal.trap 'TERM' do

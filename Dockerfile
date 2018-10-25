@@ -18,7 +18,7 @@ WORKDIR $HELPY_HOME
 
 USER $HELPY_USER
 
-RUN git clone --branch $HELPY_VERSION --depth=1 https://github.com/helpyio/helpy.git .
+RUN git clone --branch $HELPY_VERSION --depth=1 https://github.com/mikelkew/helpy.git .
 
 # add the slack integration gem to the Gemfile if the HELPY_SLACK_INTEGRATION_ENABLED is true
 # use `test` for sh compatibility, also use only one `=`. also for sh compatibility
