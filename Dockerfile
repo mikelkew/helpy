@@ -18,7 +18,7 @@ WORKDIR $HELPY_HOME
 
 USER $HELPY_USER
 
-RUN git clone --branch $HELPY_VERSION --depth=1 https://github.com/helpyio/helpy.git .
+RUN git clone --branch $HELPY_VERSION --depth=1 https://github.com/mikelkew/helpy.git .
 
 # add the slack integration gem to the Gemfile if the HELPY_SLACK_INTEGRATION_ENABLED is true
 # use `test` for sh compatibility, also use only one `=`. also for sh compatibility
@@ -29,7 +29,7 @@ RUN bundle install
 RUN touch /helpy/log/production.log && chmod 0664 /helpy/log/production.log
 
 # Due to a weird issue with one of the gems, execute this permissions change:
-RUN chmod +r /usr/local/bundle/gems/griddler-mandrill-1.1.3/lib/griddler/mandrill/adapter.rb
+RUN chmod +r /usr/local/bundle/gems/griddler-mandrill-1.1.4/lib/griddler/mandrill/adapter.rb
 
 # manually create the /helpy/public/assets folder and give the helpy user rights to it
 # this ensures that helpy can write precompiled assets to it
