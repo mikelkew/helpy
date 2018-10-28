@@ -11,7 +11,9 @@ preload_app true
 # haven't responded within 30 seconds
 timeout 30
 
-listen ENV['UNICORN_PORT'] if ENV['UNICORN_PORT']
+if ENV['UNICORN_PORT']
+  listen ENV['UNICORN_PORT'].to_i
+end
 
 before_fork do |_server, _worker|
 

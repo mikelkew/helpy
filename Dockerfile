@@ -10,7 +10,7 @@ RUN apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y nodejs postgresql-client imagemagick --no-install-recommends \
   && rm -rf /var/lib/apt/lists/* \
-  && useradd --no-create-home $HELPY_USER \
+  && useradd $HELPY_USER \
   && mkdir -p $HELPY_HOME \
   && chown -R $HELPY_USER:$HELPY_USER $HELPY_HOME /usr/local/lib/ruby /usr/local/bundle
 

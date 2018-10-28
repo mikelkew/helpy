@@ -5,24 +5,23 @@ services:
     image: mikelkew/helpy
     restart: always
     networks:
-      - web
+      - proxy
       - default
     volumes:
       - rails-assets:/helpy/public
     env_file: docker/.env
     environment:
-      - UNICORN_PORT=9000
+    #  - UNICORN_PORT=9000
     #  - DO_NOT_PREPARE=true
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     expose:
       - "9000"
     labels:
-      - "traefik.docker.network=web"
+      - "traefik.docker.network=proxy"
       - "traefik.enable=true"
       - "traefik.frontend.rule=Host:support.roaradventures.com"
-      - "traefik.port=9000"
+      - "traefik.port=8080"
   postgres:
     image: postgres:9.4
     restart: always
@@ -37,5 +36,5 @@ volumes:
     driver: local
 
 networks:
-  web:
+  proxy:
     external: true
