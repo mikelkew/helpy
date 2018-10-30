@@ -11,8 +11,7 @@
   header /uploads
 
   proxy / helpy:8080/ {
-    except /assets
-    except /uploads
+    except /assets /uploads
     header_upstream Host {host}
     header_upstream X-Real-IP {remote}
     header_upstream X-Forwarded-Proto {scheme}
