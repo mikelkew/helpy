@@ -20,6 +20,7 @@ done
 echo "postgres is now avaliable"
 
 RUN_PREPARE=${DO_NOT_PREPARE:-false}
+SERVER_PORT=${UNICORN_PORT:-"8080"}
 
 if [[ "$RUN_PREPARE" = "false" ]]
   then
@@ -31,4 +32,4 @@ fi
 
 echo "starting unicorn"
 
-exec bundle exec unicorn -E production -c config/unicorn.rb
+exec bundle exec unicorn -E production -p $SERVER_PORT -c config/unicorn.rb

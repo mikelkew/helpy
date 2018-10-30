@@ -8,9 +8,6 @@ services:
       - ./certs:/etc/caddy/certs
     volumes_from:
       - helpy:ro
-    ports:
-      - "8000:80"
-      - "8043:443"
     networks:
       - proxy
       - front
@@ -21,11 +18,12 @@ services:
       - "traefik.enable=true"
       - "traefik.frontend.rule=Host:support.roaradventures.com"
       - "traefik.frontend.passHostHeader=true"
-      - "traefik.port=8000"
+      - "traefik.frontend.entryPoints=http"
+      - "traefik.port=80"
     depends_on:
       - helpy
   helpy:
-    image: mikelkew/helpy
+    image: mikelkew/helpy:traefik-v4
     restart: always
     networks:
       - front
@@ -40,14 +38,20 @@ services:
       - postgres
     expose:
       - "8080"
+    labels:
+      - "traefik.enable=false"
   postgres:
     image: postgres:9.4
     restart: always
     networks:
       - back
+    ports:
+      - 5432:5432
     env_file: docker/.env
     volumes:
       - ./postgres:/var/lib/postgresql/data
+    labels:
+      - "traefik.enable=false"
 
 volumes:
   rails-assets:
