@@ -95,7 +95,7 @@ class TopicsController < ApplicationController
       name: params[:topic][:name],
       private: params[:topic][:private],
       doc_id: params[:topic][:doc_id],
-      team_list: params[:topic][:team_list],
+      team_list: params[:topic][:team_list].try(:parameterize, '_'),
       channel: 'web')
 
     associate_with_doc
