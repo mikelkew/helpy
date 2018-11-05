@@ -28,6 +28,8 @@ module Helpy
       Devise::Mailer.layout "mailer" # email.haml or email.erb
     end
 
+    config.middleware.use "SetAppVariables"
+
   end
 end
 
